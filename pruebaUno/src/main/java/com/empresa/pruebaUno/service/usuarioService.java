@@ -30,4 +30,8 @@ public class usuarioService {
     public List<Usuario> List(){
         return usuarioRepository.findAll();
     }
+    
+    public List<Usuario> findByUsernameAndEmail(String username, String email) {
+        return this.usuarioRepository.findAllByUsernameOrUsuarioEmail(username, email);
+    }
 }
