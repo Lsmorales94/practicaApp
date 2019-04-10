@@ -62,7 +62,7 @@ public class usuarioController {
     }
     
     
-    @PostMapping(value = "/login/{username}/password/{password}/")
+    @PostMapping(value = "/login/{username}/password/{password}")
     public ResponseEntity<Usuario> login(@Valid @PathVariable String username,@Valid @PathVariable String password){
        
         
