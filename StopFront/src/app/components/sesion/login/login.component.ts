@@ -3,18 +3,19 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../../../services/login.service';
 import { Usuario } from '../../../models/usuario.model';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
-})
+}) 
 export class LoginComponent implements OnInit {
 
   
   public myForm:FormGroup;
-  constructor(private formBuilder:FormBuilder, 
-    private loginService : LoginService,private usr:Usuario,private router: Router) { }
+  constructor(private formBuilder:FormBuilder, private loginService : LoginService,
+                private usr:Usuario, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit() {
     this.myForm = this.formBuilder.group({
@@ -27,15 +28,17 @@ export class LoginComponent implements OnInit {
   {
     let user = <Usuario>await this.loginService.getLogin(this.myForm.value).toPromise();
     
-    if(user.id!=null)
+    if(user!=null)
     {
+      this.toastr.success('Bienvenido');
       this.loginService.setLoginInfo(user);
       this.router.navigate(['/home']);
     }
     else
     {
-      alert("usuario o contraseña incorrectos"); 
+      this.toastr.error('Usuario o contraseña incorrectos');
     }
   }
+  
 
 }

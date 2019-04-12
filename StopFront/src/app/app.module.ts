@@ -15,7 +15,8 @@ import { ActividadComponent } from './components/tratamientos/actividad/activida
 import { MedicamentoComponent } from './components/tratamientos/crud/medicamento/medicamento.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule,ReactiveFormsModule } from "@angular/forms";
+import { FormsModule,ReactiveFormsModule } from "@angular/forms"; 
+import { ToastrModule } from 'ngx-toastr';
 
 
 // Material
@@ -68,7 +69,12 @@ import { Usuario } from './models/usuario.model';
     LayoutModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 1500,
+      positionClass: 'toast-top-right',
+      preventDuplicates: false,
+    })
   ],
   providers: [Usuario],
   bootstrap: [AppComponent]

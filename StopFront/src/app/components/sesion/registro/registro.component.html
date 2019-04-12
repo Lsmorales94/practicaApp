@@ -32,5 +32,6 @@
           </mat-select> -->
       <button mat-raised-button color="primary" [disabled]="myForm.invalid" (click)="registrarse()">Registrarse</button>
       <br>
+      <button mat-raised-button [routerLink]="['/login']">Iniciar Sesion</button>
     </mat-card>
   </form>

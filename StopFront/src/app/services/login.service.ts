@@ -23,7 +23,7 @@ export class LoginService {
   }
 
   public getLogin(usr) {
-    return this.http.get(this.accessPointUrl + '/login/email/' + usr.usuarioEmail + "/password/" + usr.password, { headers: this.headers });
+    return this.http.get(this.accessPointUrl + '/login/email/'+usr.usuarioEmail+"/password/"+usr.password, { headers: this.headers });
   }
   public getTipoUsuario(credentials) {
     return this.http.get(this.accessPointUrl + '/getTipousuario', { headers: this.headers, params: credentials });
