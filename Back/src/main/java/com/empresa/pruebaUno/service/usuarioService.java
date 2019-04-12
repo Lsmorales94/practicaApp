@@ -8,6 +8,7 @@ package com.empresa.pruebaUno.service;
 import com.empresa.pruebaUno.entity.Usuario;
 import com.empresa.pruebaUno.repository.usuarioRepository;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class usuarioService {
     @Autowired
     usuarioRepository usuarioRepository;
     
-    public Usuario Safe(Usuario usuario){
+    public Usuario Save(Usuario usuario){
         return usuarioRepository.save(usuario);
     }
     
@@ -31,12 +32,16 @@ public class usuarioService {
         return usuarioRepository.findAll();
     }
     
-    public List<Usuario> findByUsernameAndEmail(String username, String email) {
-        return this.usuarioRepository.findAllByUsernameOrUsuarioEmail(username, email);
+    public Optional<Usuario> findOne(Integer id){
+        return this.usuarioRepository.findById(id);
     }
     
-    public Usuario findByUsernameAndPassword(String username, String password){
-        return usuarioRepository.findByUsernameAndPassword(username, password);
+    public Usuario findByusuarioEmail(String email) {
+        return this.usuarioRepository.findByusuarioEmail(email);
+    }
+    
+    public Usuario findByusuarioEmailAndPassword(String usuarioEmail, String password){
+        return usuarioRepository.findByusuarioEmailAndPassword(usuarioEmail, password);
     }
     
 }

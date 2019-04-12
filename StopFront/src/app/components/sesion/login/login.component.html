@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>Iniciar Sesión</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="example-container">
+    <form [formGroup]="myForm" novalidate autocomplete="off">
+        <mat-card class="example-container">
+            <mat-card-title style="font-size: 14px; text-align: center">Iniciar sesión con una cuenta existente</mat-card-title>
+            <img class="img" src="../../../../assets/img/logo.png" alt="Mediclick">
+            <mat-form-field>
+                <input matInput type="correo" formControlName="usuarioEmail" placeholder="Correo electrónico">
+                <mat-card-title *ngIf="myForm.get('usuarioEmail').hasError('required') && myForm.get('usuarioEmail').touched" style="font-size: 14px; text-align: center">Correo obligatorio</mat-card-title>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" formControlName="password" placeholder="Contraseña">
+                <mat-card-title *ngIf="myForm.get('password').hasError('required') && myForm.get('password').touched" style="font-size: 14px; text-align: center">Correo obligatorio</mat-card-title>
+
+            </mat-form-field>
+            <button mat-raised-button color="primary" [disabled]="myForm.invalid" (click)="Login()">Iniciar Sesión</button>
+            <br>
+            <!-- <button mat-raised-button>¿Olvidó su contraseña?</button> -->
+            <br>
+            <button mat-raised-button [routerLink]="['/registro']">Registrate</button>
+        </mat-card>
+    </form>
+
+
+</div>

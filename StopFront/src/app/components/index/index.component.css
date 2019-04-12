@@ -1,0 +1,29 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: max-content;
+    max-height: max-content;
+
+}
+
+.img{
+    width: 90%;
+    margin: auto
+}
+
+.example-container>* {
+    width: auto
+}
+
+.example-button-row button,
+.example-button-row a {
+    margin-right: 8px;
+}
+
+p {
+    background-color: #080735;
+    font-size: 18px;
+    text-align: center;
+    color: white;
+  }

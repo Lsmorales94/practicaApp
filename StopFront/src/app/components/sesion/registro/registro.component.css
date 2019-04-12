@@ -1,0 +1,27 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: unset;
+  max-height: unset;
+
+}
+.img{
+width: 90%;
+margin: auto
+}
+
+.example-container>* {
+  width: auto
+}
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+
+.div{
+  width:  300px;
+  margin: auto;
+
+}

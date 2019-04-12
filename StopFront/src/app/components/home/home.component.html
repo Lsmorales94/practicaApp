@@ -1,0 +1,62 @@
+<mat-toolbar id="mainToolbar" color="primary">
+  <mat-icon (click)="onToolbarMenuToggle()" id="toolbarMenu">subject</mat-icon>
+  Stop Smoking
+  <br>
+  <span class="toolbar-spacer"></span>
+  <span class="toolbar-spacer">Bienvenido {{nombreUsuario}}</span>
+  <button mat-button (click)="logOut()">
+    <mat-icon class="toolbar-icon"  matBadge="8" matBadgePosition="after" matBadgeColor="accent">vpn_key</mat-icon>
+  </button>  
+  </mat-toolbar>
+
+<mat-sidenav-container id="sidenavContainer" fullscreen>
+  <mat-sidenav mode="side" #sidenav id="sidenav" [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen" opened>
+
+    <mat-list id="menus">
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>record_voice_over</mat-icon>
+          Recordatorio</button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>notifications_active</mat-icon>
+          Medicamentos</button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>assignment</mat-icon>
+          Historial</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>alarm</mat-icon>
+          Alarma</button>
+      </mat-list-item>
+      <mat-list-item>
+          <button class="menu-item" mat-flat-button>
+            <mat-icon>place</mat-icon>
+            Directorio de farmacias</button>
+        </mat-list-item>
+
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>settings_application</mat-icon>
+          Settings</button>
+      </mat-list-item>
+
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
+    <mat-selection-list class="dash-list">
+      <h3>Tareas</h3>
+      <mat-list-option *ngFor="let todo of task">
+        {{todo}}
+        
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<router-outlet></router-outlet>

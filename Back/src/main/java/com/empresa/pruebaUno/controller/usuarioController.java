@@ -8,6 +8,7 @@ package com.empresa.pruebaUno.controller;
 import com.empresa.pruebaUno.entity.Usuario;
 import com.empresa.pruebaUno.service.usuarioService;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
@@ -23,71 +24,55 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //
-
 /**
  *
  * @author britney guzman
  */
-
 @RestController
 @CrossOrigin
 @RequestMapping("/usuario")
 public class usuarioController {
-     
+
     @Autowired
     usuarioService usuarioService;
-    
-//    @CrossOrigin(origins="*")
-//    @PostMapping(value="/registrar")
-//    public ResponseEntity<Usuario> Save (@RequestBody Usuario usuario){
-//         return new ResponseEntity<>(usuarioService.Safe(usuario), HttpStatus.OK);
-//    }
-    
-    @CrossOrigin(origins="*")
-    @GetMapping(value="/listar")
-    public ResponseEntity<List<Usuario>> List (){        
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(value = "/registrar")
+    public ResponseEntity<Usuario> create(@Valid @RequestBody Usuario user) {
+
+        Usuario usr = this.usuarioService.findByusuarioEmail(user.getUsuarioEmail());
+        if (usr != null) {
+
+            throw new EntityNotFoundException("El usuario se encuentra registrado");
+        }
+        return new ResponseEntity<>(usuarioService.Save(user), HttpStatus.CREATED);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/login/email/{usuarioEmail}/password/{password}")
+    public ResponseEntity<Usuario> login(@Valid @PathVariable String usuarioEmail, @Valid @PathVariable String password) {
+
+        Usuario user = this.usuarioService.findByusuarioEmailAndPassword(usuarioEmail, password);
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/listar")
+    public ResponseEntity<List<Usuario>> List() {
         return new ResponseEntity<>(usuarioService.List(), HttpStatus.OK);
     }
-    
-    @CrossOrigin(origins="*")
-    @PostMapping(value = "/registrar")
-    public ResponseEntity<Usuario> create(@Valid @RequestBody Usuario user){
-       
-        List<Usuario> users = this.usuarioService.findByUsernameAndEmail(user.getUsername(), user.getPassword());
-            if(!users.isEmpty()){
-               
-                throw new EntityNotFoundException("El usuario se encuentra registrado");
-            }
-        return new ResponseEntity<>(usuarioService.Safe(user), HttpStatus.CREATED);    
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Usuario> findOne(@Valid @PathVariable Integer id) {
+
+        Optional<Usuario> user = this.usuarioService.findOne(id);
+
+        if (user == null) {
+            throw new EntityNotFoundException("No se pudo obtener el usuario ");
+        }
+
+        return new ResponseEntity(user, HttpStatus.ACCEPTED);
     }
-    
-    
-    @PostMapping(value = "/login/{username}/password/{password}")
-    public ResponseEntity<Usuario> login(@Valid @PathVariable String username,@Valid @PathVariable String password){
-       
-        
-        Usuario user = this.usuarioService.findByUsernameAndPassword(username, password);
-            if(user == null){
-                throw new EntityNotFoundException("El usuario no se encuentra registrado");
-            }
-        return new ResponseEntity<>(user, HttpStatus.OK);    
-    }
-    
-    
-//    @CrossOrigin(origins="*")
-//    @RequestMapping("/login")
-//    public boolean login(@RequestBody Usuario user) {
-//        return
-//          user.getUsername().equals("user") && user.getPassword().equals("password");
-//    }
-//     
-//    @CrossOrigin(origins="*")
-//    @RequestMapping("/user")
-//    public Principal user(HttpServletRequest request) {
-//        String authToken = request.getHeader("Authorization")
-//          .substring("Basic".length()).trim();
-//        return () ->  new String(Base64.getDecoder()
-//          .decode(authToken)).split(":")[0];
-//    }
-    
+
 }

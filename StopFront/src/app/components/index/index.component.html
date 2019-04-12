@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>Iniciar Sesión</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="example-container">
+    <mat-card class="example-container">
+        <img class="img" src="../../../../assets/img/logo.png" alt="Mediclick">
+        <br>
+        <mat-card-title style="font-size: 14px; text-align: center">Controla tus deseos de Fumar</mat-card-title>
+        
+        <br>
+        <mat-card-title style="font-size: 14px; text-align: center">
+            <mat-icon color="primary" align="left">alarm</mat-icon>
+            Alarma de recordatorio para medicación</mat-card-title>
+        <br>
+        <mat-card-title style="font-size: 14px; text-align: center">
+            <mat-icon color="primary" align="left">local_atm</mat-icon>
+            Historial de dinero ahorrado</mat-card-title>
+        <br>
+        <mat-card-title style="font-size: 14px; text-align: center">
+            <mat-icon color="primary" align="left">smoke_free</mat-icon>
+            Vence la urgencia</mat-card-title>
+        <br>
+        <p>
+            INGRESAR AHORA
+        </p>
+        <mat-card-title style="font-size: 14px; text-align: center">Al ingresar esta aceptando terminos de uso y </mat-card-title>
+        <mat-card-title style="font-size: 14px; text-align: center"> politicas de privacidad de usuario</mat-card-title>
+        <br>
+        <button mat-raised-button [routerLink]="['/login']">Iniciar Sesion</button>
+        <br>
+        <button mat-raised-button [routerLink]="['/registro']">Registrate</button>
+    </mat-card>
+</div>

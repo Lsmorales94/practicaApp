@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Registrarte</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="div">
+  <form [formGroup]="myForm" novalidate autocomplete="off">
+    <mat-card class="example-container">
+      <mat-card-title style="font-size: 14px; text-align: center">Registrarse como usuario nuevo</mat-card-title>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Nombre" formControlName="usuarioNombre">
+        <mat-card-title *ngIf="myForm.get('usuarioNombre').hasError('required') && myForm.get('usuarioNombre').touched" style="font-size: 14px; text-align: center">Nombre de usuario obligatorio</mat-card-title>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Apellido" formControlName="usuarioApellido">
+        <mat-card-title *ngIf="myForm.get('usuarioApellido').hasError('required') && myForm.get('usuarioApellido').touched" style="font-size: 14px; text-align: center">Apellido de usuario obligatorio</mat-card-title>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Teléfono" formControlName="usuarioTelefono">
+        <mat-card-title *ngIf="myForm.get('usuarioTelefono').hasError('required') && myForm.get('usuarioTelefono').touched" style="font-size: 14px; text-align: center">Telefono de usuario obligatorio</mat-card-title>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="email" placeholder="Correo electrónico" formControlName="usuarioEmail">
+        <mat-card-title *ngIf="myForm.get('usuarioEmail').hasError('required') && myForm.get('usuarioEmail').touched" style="font-size: 14px; text-align: center">Email obligatorio</mat-card-title>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Contraseña" formControlName="password">
+        <mat-card-title *ngIf="myForm.get('password').hasError('required') && myForm.get('password').touched" style="font-size: 14px; text-align: center">contraseña obligatorio</mat-card-title>
+      </mat-form-field>
+      <!-- <mat-select placeholder="Elige tu rol">
+            <mat-option *ngFor="let tipoUsuario of tipoUsuarios" [value]="tipoUsuario">{{tipoUsuario.nombre}}</mat-option>
+          </mat-select> -->
+      <button mat-raised-button color="primary" [disabled]="myForm.invalid" (click)="registrarse()">Registrarse</button>
+      <br>
+    </mat-card>
+  </form>
