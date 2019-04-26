@@ -1,12 +1,19 @@
 package com.empresa.pruebaUno.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,17 +54,21 @@ public class Usuario {
     
     @Column(name = "deleted_at")
     private Integer deletedAt = 0;
+    
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    private Set<Tareas> tareas;
 
-    public Usuario(int id, String usuarioNombre, String usuarioApellido, String usuarioTelefono, String usuarioEmail, int usuarioEdad, String username, String password, Date createdAt, Date updatedAt) {
+    public Usuario() {
+    }
+
+    public Usuario(int id, String usuarioNombre, String usuarioApellido, String usuarioTelefono, String usuarioEmail, String password, Set<Tareas> tareas) {
         this.id = id;
         this.usuarioNombre = usuarioNombre;
         this.usuarioApellido = usuarioApellido;
         this.usuarioTelefono = usuarioTelefono;
         this.usuarioEmail = usuarioEmail;
         this.password = password;
-    }
-
-    public Usuario(){
+        this.tareas = tareas;
     }
 
     public int getId() {
@@ -116,7 +127,16 @@ public class Usuario {
         this.deletedAt = deletedAt;
     }
 
-    
+    public Set<Tareas> getTareas() {
+        return tareas;
+    }
 
+    public void setTareas(Set<Tareas> tareas) {
+        this.tareas = tareas;
+    }
+
+    
+    
+    
 
 }
