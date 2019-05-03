@@ -7,7 +7,6 @@ import { RegistroComponent } from './components/sesion/registro/registro.compone
 import { LoginComponent } from './components/sesion/login/login.component';
 import { RecuperarClaveComponent } from './components/sesion/recuperar-clave/recuperar-clave.component';
 import { PerfilComponent } from './components/sesion/perfil/perfil.component';
-import { EquipoComponent } from './components/sesion/equipo/equipo.component';
 import { DiarioComponent } from './components/tratamientos/diario/diario.component';
 import { InformesComponent } from './components/tratamientos/informes/informes.component';
 import { ActividadesDiaComponent } from './components/tratamientos/actividades-dia/actividades-dia.component';
@@ -29,7 +28,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { SlidemenuComponent } from './components/master/slidemenu/slidemenu.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { IndexComponent } from './components/index/index.component';
 import { HomeComponent } from './components/home/home.component';
@@ -43,13 +41,11 @@ import { Usuario } from './models/usuario.model';
     LoginComponent,
     RecuperarClaveComponent,
     PerfilComponent,
-    EquipoComponent,
     DiarioComponent,
     InformesComponent,
     ActividadesDiaComponent,
     ActividadComponent,
     MedicamentoComponent,
-    SlidemenuComponent,
     IndexComponent,
     HomeComponent,
   ],

@@ -42,8 +42,6 @@ public class Tareas {
     @JsonIgnore
     private Usuario usuario;
         
-    @Column(name = "deleted_at")
-    private Integer deletedAt = 0;
 
     public Tareas() {
     }
@@ -74,7 +72,7 @@ public class Tareas {
     public String getTareasDescripcion() {
         return tareasDescripcion;
     }
-
+    
     public void setTareasDescripcion(String tareasDescripcion) {
         this.tareasDescripcion = tareasDescripcion;
     }
@@ -87,12 +85,5 @@ public class Tareas {
         this.usuario = usuario;
     }
 
-    public Integer getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(Integer deletedAt) {
-        this.deletedAt = deletedAt;
-    }
     
 }

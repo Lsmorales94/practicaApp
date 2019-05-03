@@ -16,7 +16,7 @@ export class HomeComponent {
   nombreUsuario = "";
   constructor(private loginService: LoginService, private router: Router){} 
 
-  task: string[] = [
+  task: string[] = [ 
     '1 semana sin fumar', '2 Semanas sin fumar', '1 Mes sin fumar', '3 Meses sin fumar', ' 6 Meses sin fumar'
   ]
   ngOnInit() {

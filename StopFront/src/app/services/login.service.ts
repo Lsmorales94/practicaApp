@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class LoginService {
   private headers: HttpHeaders;

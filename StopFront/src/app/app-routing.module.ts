@@ -4,7 +4,6 @@ import { LoginComponent } from './components/sesion/login/login.component';
 import { RegistroComponent } from './components/sesion/registro/registro.component';
 import { RecuperarClaveComponent } from './components/sesion/recuperar-clave/recuperar-clave.component';
 import { PerfilComponent } from './components/sesion/perfil/perfil.component';
-import { EquipoComponent } from './components/sesion/equipo/equipo.component';
 import { DiarioComponent } from './components/tratamientos/diario/diario.component';
 import { InformesComponent } from './components/tratamientos/informes/informes.component';
 import { ActividadesDiaComponent } from './components/tratamientos/actividades-dia/actividades-dia.component';
@@ -20,7 +19,6 @@ const routes: Routes = [
   { path:  'home' , component: HomeComponent},
   { path: 'resetpass', component: RecuperarClaveComponent },
   { path: 'perfil', component: PerfilComponent },
-  { path: 'equipo', component: EquipoComponent },
   { path: 'diario', component: DiarioComponent },
   { path: 'informes', component: InformesComponent },
   { path: 'actividadDia', component: ActividadesDiaComponent },
