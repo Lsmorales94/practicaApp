@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.empresa.pruebaUno.repository.TareasRepository;
 import com.empresa.pruebaUno.repository.UsuarioRepository;
+import java.time.Instant;
+import java.util.Date;
 
 /**
  *
@@ -60,6 +62,7 @@ public class TareasController {
           return usuarioRepository.findById(usuario_id)
                   .map(usuario -> {
                       tarea.setUsuario(usuario);
+                      tarea.setTareasFecha(Date.from(Instant.now()));
                       return new ResponseEntity<>(tareasRepository.save(tarea), HttpStatus.CREATED);                      
                   }).orElseThrow(() -> new FailCreateException("No se pudo actualizar el usuario con id "+usuario_id));      
     }

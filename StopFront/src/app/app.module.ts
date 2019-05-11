@@ -7,15 +7,11 @@ import { RegistroComponent } from './components/sesion/registro/registro.compone
 import { LoginComponent } from './components/sesion/login/login.component';
 import { RecuperarClaveComponent } from './components/sesion/recuperar-clave/recuperar-clave.component';
 import { PerfilComponent } from './components/sesion/perfil/perfil.component';
-import { DiarioComponent } from './components/tratamientos/diario/diario.component';
-import { InformesComponent } from './components/tratamientos/informes/informes.component';
-import { ActividadesDiaComponent } from './components/tratamientos/actividades-dia/actividades-dia.component';
-import { ActividadComponent } from './components/tratamientos/actividad/actividad.component';
-import { MedicamentoComponent } from './components/tratamientos/crud/medicamento/medicamento.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from "@angular/forms"; 
 import { ToastrModule } from 'ngx-toastr';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 // Material
@@ -32,6 +28,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { IndexComponent } from './components/index/index.component';
 import { HomeComponent } from './components/home/home.component';
 import { Usuario } from './models/usuario.model';
+import { InformesComponent } from './components/categorias/informes/informes.component';
+import { ActividadComponent } from './components/categorias/actividad/actividad.component';
 
 
 @NgModule({
@@ -41,13 +39,11 @@ import { Usuario } from './models/usuario.model';
     LoginComponent,
     RecuperarClaveComponent,
     PerfilComponent,
-    DiarioComponent,
     InformesComponent,
-    ActividadesDiaComponent,
     ActividadComponent,
-    MedicamentoComponent,
     IndexComponent,
     HomeComponent,
+    InformesComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +62,7 @@ import { Usuario } from './models/usuario.model';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     ToastrModule.forRoot({
       timeOut: 1500,
       positionClass: 'toast-top-right',

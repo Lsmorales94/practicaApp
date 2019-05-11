@@ -14,9 +14,17 @@ export class HomeComponent {
   isMenuOpen = false;
   contentMargin = 240;
   nombreUsuario = "";
-  constructor(private loginService: LoginService, private router: Router){} 
+  actividad:boolean;
+  perfil:boolean; 
 
-  task: string[] = [ 
+  public showActividadComponent = false;
+  public showPerfilComponent = false;
+  
+  constructor(private loginService: LoginService, private router: Router) { 
+    
+  }
+
+  task: string[] = [
     '1 semana sin fumar', '2 Semanas sin fumar', '1 Mes sin fumar', '3 Meses sin fumar', ' 6 Meses sin fumar'
   ]
   ngOnInit() {
@@ -32,7 +40,18 @@ export class HomeComponent {
       this.contentMargin = 240;
     }
   }
-  logOut(){
+  logOut() {
     this.router.navigate(['/login']);
   }
+
+  public navigateComponent(componente)
+  {
+    this.showActividadComponent = false;
+    this.showPerfilComponent = false;
+    switch(componente)
+    {
+        case 'actividad':{this.showActividadComponent = true;break;}
+        case 'perfil':{this.showPerfilComponent = true;break;}
+    }
+  };
 }
