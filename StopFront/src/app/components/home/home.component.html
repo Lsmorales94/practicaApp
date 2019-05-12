@@ -40,7 +40,7 @@
         </button>
       </mat-list-item>
       <mat-list-item>
-        <button class="menu-item" mat-flat-button>
+        <button class="menu-item" mat-flat-button (click)="navigateComponent('cigarrillos');">
           <mat-icon>smoke_free</mat-icon>
            Cigarros Fuera
         </button>
@@ -59,6 +59,7 @@
     
 <app-actividad *ngIf=showActividadComponent></app-actividad>
 <app-perfil *ngIf=showPerfilComponent></app-perfil>
+<app-cigarrillos *ngIf=showCigarrillosComponent></app-cigarrillos>
     <!-- <app-actividad></app-actividad>-->
    <!-- <mat-selection-list class="dash-list">
       <h3>Metas</h3>

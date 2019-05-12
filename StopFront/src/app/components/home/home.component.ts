@@ -19,6 +19,7 @@ export class HomeComponent {
 
   public showActividadComponent = false;
   public showPerfilComponent = false;
+  public showCigarrillosComponent = false;
   
   constructor(private loginService: LoginService, private router: Router) { 
     
@@ -48,10 +49,12 @@ export class HomeComponent {
   {
     this.showActividadComponent = false;
     this.showPerfilComponent = false;
+    this.showCigarrillosComponent = false;
     switch(componente)
     {
         case 'actividad':{this.showActividadComponent = true;break;}
         case 'perfil':{this.showPerfilComponent = true;break;}
+        case 'cigarrillos':{this.showCigarrillosComponent = true;break}
     }
   };
 }

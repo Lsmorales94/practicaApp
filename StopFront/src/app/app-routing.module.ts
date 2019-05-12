@@ -8,6 +8,7 @@ import { InformesComponent } from './components/categorias/informes/informes.com
 import { ActividadComponent } from './components/categorias/actividad/actividad.component';
 import {IndexComponent} from './components/index/index.component';
 import { HomeComponent } from './components/home/home.component';
+import { CigarrillosComponent } from './components/categorias/cigarrillos/cigarrillos.component';
 
 const routes: Routes = [
   {path:'',component : IndexComponent},
@@ -17,8 +18,9 @@ const routes: Routes = [
   { path: 'resetpass', component: RecuperarClaveComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'informes', component: InformesComponent },
-  { path: 'actividad', component: ActividadComponent }
-
+  { path: 'actividad', component: ActividadComponent },
+  {  path: 'cigarrillos', component: CigarrillosComponent}
+  
 ];
 
 @NgModule({

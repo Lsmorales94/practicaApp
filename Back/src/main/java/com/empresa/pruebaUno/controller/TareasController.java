@@ -91,8 +91,7 @@ public class TareasController {
             return tareasRepository.findById(tarea_Id)
                 .map(tarea -> {
                     tarea.setTareasDescripcion(tareasUpdated.getTareasDescripcion());
-                    tarea.setTareasFecha(tareasUpdated.getTareasFecha());
-                    
+                    tarea.setTareasFecha(Date.from(Instant.now()));
                      return new ResponseEntity<>(tareasRepository.save(tarea), HttpStatus.ACCEPTED); 
                 }).orElseThrow(() -> new EntityNotFoundException("No se pudo encontrar la Tarea "+tarea_Id));
         }else 

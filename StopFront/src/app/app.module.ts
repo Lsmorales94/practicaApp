@@ -30,6 +30,7 @@ import { HomeComponent } from './components/home/home.component';
 import { Usuario } from './models/usuario.model';
 import { InformesComponent } from './components/categorias/informes/informes.component';
 import { ActividadComponent } from './components/categorias/actividad/actividad.component';
+import { CigarrillosComponent } from './components/categorias/cigarrillos/cigarrillos.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ActividadComponent } from './components/categorias/actividad/actividad.
     ActividadComponent,
     IndexComponent,
     HomeComponent,
-    InformesComponent
+    InformesComponent,
+    CigarrillosComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,6 @@ export class Tareas{
     id: number;
     tareasFecha: Date;
     tareasDescripcion:string;
-    usuario : Usuario;
+    usuario : Usuario; 
 }
   

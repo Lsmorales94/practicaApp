@@ -1,60 +1,90 @@
-
 <div class="row mt-5">
   <div class="col">
-        <ng-template #content let-c="close" let-d="dismiss">
-            <div class="modal-dialog modal-lg" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Nueva Actividad </h5>
-                  <button type="button" class="close" (click)="d('Cross click')" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="">
-                    <input type="text" name="tareaId" id="tareaId" class="form-control">
-                    <div class="form-group">
-                      <label for="descripcion">Descripción</label>
-                      <textarea name="descripcion" id="descripcion" class="form-control" cols="50" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary float-rigth">Guardar</button>
-                  </form>
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nueva Actividad </h5>
+            <button type="button" class="close" (click)="d('Cross click')" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="myForm" novalidate autocomplete="off">
+              <mat-card class="example-container">
+                <mat-card-title style="font-size: 14px; text-align: center">Registrar Actividad</mat-card-title>
+                <mat-form-field>
+                  <input matInput type="text" placeholder="Descripción" formControlName="tareasDescripcion">
+                  <mat-card-title
+                    *ngIf="myForm.get('tareasDescripcion').hasError('required') && myForm.get('tareasDescripcion').touched"
+                    style="font-size: 14px; text-align: center">Nombre de usuario obligatorio</mat-card-title>
+                </mat-form-field>
+                <br>
+                <button mat-raised-button color="primary" [disabled]="myForm.invalid" (click)="onSaveTarea()">Agregar
+                  Actividad</button>
+              </mat-card>
+            </form>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <button class="btn btn-primary float-right mb-3" (click)="open(content)">Nueva Actividad</button>
+
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Código</th>
+          <th scope="col">fecha</th>
+          <th scope="col">descripcion</th>
+          <th scope="col">&nbsp;</th>
+          <th scope="col">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tarea of tareas; index as i">
+          <td scope="row">{{i+1}}</td>
+          <td>{{tarea.id}}</td>
+          <td>{{tarea.tareasFecha}}</td>
+          <td>{{tarea.tareasDescripcion}}</td>
+          <td>
+            <!--Modal para actualizar tarea -->
+            <ng-template #content let-c="close" let-d="dismiss">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalActualizar">Actualizar Actividad </h5>
+                    <button type="button" class="close" (click)="d('Cross click')" data-dismiss="modal"
+                      aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <form [formGroup]="formUpdate" novalidate autocomplete="off">
+                          <div class="container">
+            
+                            <label for="Código" ><b>Código</b></label>
+                            <input type="text" placeholder="Código" formControlName="id" value="{{tarea.id}}">
+                            <br>
+                            <label for="Descripción"><b>Descripcion del debate</b></label>
+                            <input type="text" placeholder="Descripción" formControlName="tareasDescripcion" value="{{tarea.tareasDescripcion}}">              
+                            <br> 
+                            <button type="submit"  [disabled]="formUpdate.invalid"class="btn btn-success"(click)="updateTarea(tarea.id)">Actualizar</button>         
+                          </div>         
+                      </form>      
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- <div class="modal-footer">
-              <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
-            </div>-->
-          </ng-template>
-      
-          <button class="btn btn-primary float-right mb-3" (click)="open(content)">Nueva Actividad</button>
-      
-      
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Código</th>
-            <th scope="col">fecha</th>
-            <th scope="col">descripcion</th>
-            <th scope="col">&nbsp;</th>
-            <th scope="col">&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let tarea of tareas; index as i">
-            <td scope="row">{{i+1}}</td>
-            <td>{{tarea.id}}</td>
-            <td>{{tarea.tareasFecha}}</td>
-            <td>{{tarea.tareasDescripcion}}</td>
-            <td>
-              <button class="btn btn-primary">Actualizar</button>
-            </td>
-            <td>
-              <button class="btn btn-danger" (click)="onDeleteTarea(tarea.id)">Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            </ng-template>
+            <button class="btn btn-primary float-right mb-3" (click)="open(content)">Actualizar</button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="onDeleteTarea(tarea.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
