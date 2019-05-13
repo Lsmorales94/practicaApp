@@ -13,7 +13,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,13 +57,20 @@ public class Usuario {
     @Column(name = "deleted_at")
     private Integer deletedAt = 0;
     
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    @OneToMany(mappedBy = "usuario", 
+            cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY )
     private Set<Tareas> tareas;
+    
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "usuario")
+    private Set<Cigarrillos> cigarrillos;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String usuarioNombre, String usuarioApellido, String usuarioTelefono, String usuarioEmail, String password, Set<Tareas> tareas) {
+    public Usuario(int id, String usuarioNombre, String usuarioApellido, String usuarioTelefono, String usuarioEmail, String password, Set<Tareas> tareas, Set<Cigarrillos> cigarrillos) {
         this.id = id;
         this.usuarioNombre = usuarioNombre;
         this.usuarioApellido = usuarioApellido;
@@ -69,6 +78,7 @@ public class Usuario {
         this.usuarioEmail = usuarioEmail;
         this.password = password;
         this.tareas = tareas;
+        this.cigarrillos = cigarrillos;
     }
 
     public int getId() {
@@ -135,8 +145,14 @@ public class Usuario {
         this.tareas = tareas;
     }
 
-    
-    
+    public Set<Cigarrillos> getCigarrillos() {
+        return cigarrillos;
+    }
+
+    public void setCigarrillos(Set<Cigarrillos> cigarrillos) {
+        this.cigarrillos = cigarrillos;
+    }
+  
     
 
 }
