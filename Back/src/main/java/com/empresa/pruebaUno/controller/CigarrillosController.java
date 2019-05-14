@@ -14,10 +14,14 @@ import com.empresa.pruebaUno.repository.CigarrillosRepository;
 import com.empresa.pruebaUno.repository.UsuarioRepository;
 import com.empresa.pruebaUno.service.CigarrillosService;
 import com.empresa.pruebaUno.service.UsuarioService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,17 +121,59 @@ public class CigarrillosController {
     
      //Información de consumo de un usuario
     @GetMapping("/usuario/{usuario_id}/informacionCigarrillo")
-    public ResponseEntity<List<Cigarrillos>> findByUsuarioId (@Valid @PathVariable Integer usuario_id){
+    public ResponseEntity <Cigarrillos> findByUsuarioId (@Valid @PathVariable Integer usuario_id){
     
         Optional<Usuario> user = this.usuarioService.findOne(usuario_id);
 
         if (!user.isPresent()) {
             throw new EntityNotFoundException("No se pudo obtener el usuario ");
         }   	
+        Cigarrillos cig = cigarrillosService.findByUsuarioId(usuario_id);
+        if(cig == null){
+          return null;
+        }
         return new ResponseEntity<>( cigarrillosService.findByUsuarioId(usuario_id), HttpStatus.OK);   
     }
     
+    @GetMapping("/valor/{usuario_id}")
+    public int valor(@Valid @PathVariable Integer usuario_id) {
+        int dias = 0;
+        Optional<Usuario> user = this.usuarioService.findOne(usuario_id);
+        if (user.isPresent()) {
+            Cigarrillos cig =  cigarrillosService.findByUsuarioId(usuario_id);
+            if (cig==null) {
+                return dias;
+            }else{
+                Date fechaInicio = cig.getFechaInicio();
+                Date fechaActual = cig.getFechaFin();
+    ;
+
+                dias = (int) ((fechaActual.getTime() - fechaInicio.getTime()) / 86400000);
+
+                System.out.println("Hay " + dias + " dias de diferencia");
+            }
+        }else{
+            throw new EntityNotFoundException("No se pudo obtener el usuario ");
+        }
+        return dias;
+    }
     
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+ 
+		
+//    @GetMapping("/valor/{usuario_id}")
+//    public void givenTwoDatesBeforeJava8_whenDifferentiating_thenWeGetSix()
+//            throws ParseException {
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+//        Date firstDate = sdf.parse("06/24/2017");
+//        Date secondDate = sdf.parse("06/30/2017");
+//
+//        long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+//        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+//
+//        assertEquals(diff, 6);
+//    }
 }
 
 

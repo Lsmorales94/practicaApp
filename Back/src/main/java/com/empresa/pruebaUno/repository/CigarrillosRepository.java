@@ -17,5 +17,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CigarrillosRepository extends JpaRepository<Cigarrillos, Integer> {
-     List<Cigarrillos> findByUsuarioId(Integer usuarioId);
+     Cigarrillos findByUsuarioId(Integer usuarioId);
 }
