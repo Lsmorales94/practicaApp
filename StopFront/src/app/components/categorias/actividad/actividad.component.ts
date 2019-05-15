@@ -15,6 +15,7 @@ import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
   providers: [NgbModalConfig, NgbModal]
 })
 export class ActividadComponent implements OnInit {
+  
   public menssage: Menssage;
   public tareas: Array<Tareas>;
   UsuarioId: number;
@@ -22,8 +23,8 @@ export class ActividadComponent implements OnInit {
   public formUpdate: FormGroup;
 
   constructor(private tareasService: TareasService, private loginService: LoginService,
-    private formBuilder: FormBuilder, private toastr: ToastrService, config: NgbModalConfig,
-    private modalService: NgbModal, ) {
+              private formBuilder: FormBuilder, private toastr: ToastrService, private config: NgbModalConfig,
+              private modalService: NgbModal, ) {
 
     this.UsuarioId = this.loginService.getUserId();
     // customize default values of modals used by this component tree
@@ -43,7 +44,7 @@ export class ActividadComponent implements OnInit {
       tareasDescripcion: ['',]
     })
 
-  }
+  } 
   //Carga la lista de tareas por usuario 
   list() {
     this.tareasService.getAllTareas(this.UsuarioId).subscribe(
@@ -74,6 +75,8 @@ export class ActividadComponent implements OnInit {
     if (nuevaTarea.id != null) {
       this.toastr.success('Activida Actualizada ');
       this.list();
+    }else{
+      this.toastr.error('No se pudo actualizar la actividad')
     }
   }
 

@@ -27,9 +27,9 @@ export class TareasService {
   public addTarea(UsuarioId, tarea: Tareas) {
     return this.http.post<Tareas>(this.accessPointUrl + '/usuario/' + UsuarioId + '/agregartarea/', tarea, { headers: this.headers });
   }
-   public updateTarea(UsuarioId, tareaid, tarea:Tareas){
-    return this.http.put<Tareas>(this.accessPointUrl + '/usuarioId/' + UsuarioId + '/tareaId/'+tareaid, tarea, { headers: this.headers });
-   }
+  public updateTarea(UsuarioId, tareaid, tarea: Tareas) {
+    return this.http.put<Tareas>(this.accessPointUrl + '/usuarioId/' + UsuarioId + '/tareaId/' + tareaid, tarea, { headers: this.headers });
+  }
 
 
 }

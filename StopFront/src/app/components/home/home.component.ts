@@ -20,6 +20,7 @@ export class HomeComponent {
   public showActividadComponent = false;
   public showPerfilComponent = false;
   public showCigarrillosComponent = false;
+  public showInformesComponent = false;
   
   constructor(private loginService: LoginService, private router: Router) { 
     
@@ -29,6 +30,7 @@ export class HomeComponent {
     '1 semana sin fumar', '2 Semanas sin fumar', '1 Mes sin fumar', '3 Meses sin fumar', ' 6 Meses sin fumar'
   ]
   ngOnInit() {
+    this.showInformesComponent = true;
     this.nombreUsuario = this.loginService.getUserName();
   }
   onToolbarMenuToggle() {
@@ -50,11 +52,13 @@ export class HomeComponent {
     this.showActividadComponent = false;
     this.showPerfilComponent = false;
     this.showCigarrillosComponent = false;
+    this.showInformesComponent = false;
     switch(componente)
     {
         case 'actividad':{this.showActividadComponent = true;break;}
         case 'perfil':{this.showPerfilComponent = true;break;}
         case 'cigarrillos':{this.showCigarrillosComponent = true;break}
+        case 'informes': {this.showInformesComponent = true;break}
     }
   };
 }

@@ -16,7 +16,7 @@ export class RegistroComponent implements OnInit {
   public myForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private loginService: LoginService,
            private toastr: ToastrService, private router : Router, private usr: Usuario) {
-    /* this.getTipoUsuario(); */
+    
   }
 
   ngOnInit() {
@@ -36,6 +36,8 @@ export class RegistroComponent implements OnInit {
     if (newUser.id != null) {
       this.toastr.success('Usuario Registrado');
       this.router.navigate(['/login']);
+    }else{
+      this.toastr.error('Error al registrar usuario');
     }
   }
   

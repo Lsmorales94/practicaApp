@@ -1,34 +1,60 @@
-
-<!-- Content -->
+<!-- Content      
+    "cigarrosDiarios": 15,
+    "marcaCigarrillo": "Mustang",
+    "valorCigarrillo": "2300",
+    "tiempoConsumo": 2
+-->
 <section>
     <div class="container">
-            <form role="form" id="Formulario" action="../php/contacto2.php" method="POST">
-                <div class="form-group">
-                    <label class="control-label" for="Nombre">Nombres</label>
-                    <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Introduzca su nombre" required autofocus />
-                </div>            
-                <div class="form-group">
-                    <label class="control-label" for="Motivo">Marca de cigarrillo usado</label>
-                    <select name="Motivo" class="form-control">
-                        <option value="Consulta General">Mustang Rojo</option>
-                        <option value="Realizar Pedido">Green</option>
-                        <option value="Informe un problema">Malboro</option>                        
-                        <option value="Informe un problema">Lucky</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="Empresa">Valor del cigarrillo </label>
-                    <input type="text" class="form-control" id="Empresa" name="Empresa" placeholder="Introduzca el valor del cigarrillo" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="Correo">Dirección de Correo Electrónico</label>
-                    <input type="email" class="form-control" id="Correo" name="Correo" placeholder="Introduzca su correo electrónico" required />
-                </div>                
-                <div class="form-group">                
-                    <input type="submit" class="btn btn-primary" value="Enviar">
-                    <input type="reset" class="btn btn-default" value="Limpiar">                
-                </div>
-                <div id="respuesta" style="display: none;"></div>
-            </form>
-        </div>     
+        <h1>Información de consumo</h1>
+        <hr>
+        <form [formGroup]="myForm" novalidate autocomplete="off" role="form" id="Formulario">            
+                
+            <div class="form-group">
+                <label class="control-label" for="cigarrosDiarios">Ingrese la cantidad de cigarros consumidos a
+                    Diario</label>
+                <input type="text" class="form-control"  formControlName="cigarrosDiarios" id="cigarrosDiarios" name="cigarrosDiarios"
+                    placeholder="Introduzca cantidad" required autofocus />
+                <div *ngIf="myForm.get('cigarrosDiarios').hasError('required') && myForm.get('cigarrosDiarios').touched" style="font-size: 14px; text-align: center; color:red;">No se ha ingresado una cantidad</div>
+                    
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="marcaCigarrillo">Marca de cigarrillo usado</label>
+                <select name="marcaCigarrillo" formControlName="marcaCigarrillo" class="form-control">
+                    <option value="Mustang">Mustang</option>
+                    <option value="Green">Green</option>
+                    <option value="Malboro">Malboro</option>
+                    <option value="Lucky">Lucky</option>
+                </select>
+                <div class="error" *ngIf="myForm.get('marcaCigarrillo').hasError('required') && myForm.get('marcaCigarrillo').touched" style="font-size: 14px; text-align: center;  color:red;">
+                    No se ha
+                    ingresado una marca de cigarrillo</div>
+            </div>
+
+            <div class="form-group">
+                         
+                <label class="control-label" for="valorCigarrillo">Valor del cigarrillo </label>
+                <input type="text" formControlName="valorCigarrillo" class="form-control" id="valorCigarrillo" name="valorCigarrillo"
+                    placeholder="Introduzca el valor del cigarrillo" required />
+                <div class="error" *ngIf="myForm.get('valorCigarrillo').hasError('required') && myForm.get('valorCigarrillo').touched" style="font-size: 14px; text-align: center;  color:red;">No se ha ingresado una cantidad</div>
+                         
+            </div>
+
+            <div class="form-group">
+                
+                <label class="control-label" for="tiempoConsumo">Tiempo de consumo en años </label>
+                <input type="text" formControlName="tiempoConsumo" class="form-control" id="tiempoConsumo" name="tiempoConsumo"
+                    placeholder="Tiempo de consumo en años" required />
+                <div class="error" *ngIf="myForm.get('tiempoConsumo').hasError('required') && myForm.get('tiempoConsumo').touched" style="font-size: 14px; text-align: center;  color:red;">No se ha ingresado una cantidad</div>
+                
+            </div>
+
+            <div class="form-group">
+                <input type="submit" [disabled]="myForm.invalid" class="btn btn-primary" value="Enviar" (click)="onSaveInfo()" style="font-size: 14px; text-align: center;  ">
+                <input type="reset" class="btn btn-default" value="Limpiar">
+            </div>
+            
+        </form>
+    </div>
 </section>

@@ -1,3 +1,112 @@
 <p>
   informes works!
 </p>
+<div *ngIf="mostrarDatos">
+  <div class="row mt-5">
+    <div class="col">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Código</th>
+            <th scope="col">Valor Unitario</th>
+            <th scope="col">Marca del Cigarrillo</th>
+            <th scope="col">Consumo diario actual </th>
+            <th scope="col">Tiempo de Consumo</th>
+            <th scope="col">Fecha Inicio </th>
+            <th scope="col">&nbsp;</th>
+            <th scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+          <tr *ngFor="let info of infoCigarrillo; index as i">
+            <td scope="row">{{i+1}}</td>
+            <td>{{info.id}}</td>
+            <td>{{info.valorCigarrillo}}</td>
+            <td>{{info.marcaCigarrillo}}</td>
+            <td>{{info.cigarrosDiarios}}</td>
+            <td>{{info.tiempoConsumo}}</td>
+            <td>{{info.fechaInicio}}</td>
+            <td>
+              <!--Modal para actualizar tarea -->
+              <ng-template #contentModal let-c="close" let-d="dismiss">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalActualizar">Actualizar Actividad </h5>
+                      <button type="button" class="close" (click)="d('Cross click')" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form [formGroup]="formUpdate" novalidate autocomplete="off">
+                        <div class="container">
+
+                          <label for="Código"><b>Código</b></label>
+                          <input type="text" placeholder="Código" formControlName="id" value="{{info.id}}">
+                          <br>
+
+                          <label for="cigarrosDiarios">Ingrese la cantidad de cigarros consumidos
+                            a
+                            Diario</label>
+                          <input type="text" value="{{info.cigarrosDiarios}}"
+                            formControlName="cigarrosDiarios" id="cigarrosDiarios" name="cigarrosDiarios"
+                            placeholder="Introduzca cantidad" required autofocus />
+                          <div
+                            *ngIf="formUpdate.get('cigarrosDiarios').hasError('required') && formUpdate.get('cigarrosDiarios').touched"
+                            style="font-size: 14px; text-align: center; color:red;">No se ha ingresado una cantidad
+                          </div>
+
+                          <label for="marcaCigarrillo">Marca de cigarrillo usado</label>
+                          <select name="marcaCigarrillo" formControlName="marcaCigarrillo" >
+                            <option value="Mustang">Mustang</option>
+                            <option value="Green">Green</option>
+                            <option value="Malboro">Malboro</option>
+                            <option value="Lucky">Lucky</option>
+                          </select>
+                          <div class="error"
+                            *ngIf="formUpdate.get('marcaCigarrillo').hasError('required') && formUpdate.get('marcaCigarrillo').touched"
+                            style="font-size: 14px; text-align: center;  color:red;">
+                            No se ha
+                            ingresado una marca de cigarrillo</div>
+
+                          <label for="valorCigarrillo">Valor del cigarrillo </label>
+                          <input type="text" value="{{info.valorCigarrillo}}" formControlName="valorCigarrillo"
+                             id="valorCigarrillo" name="valorCigarrillo"
+                            placeholder="Introduzca el valor del cigarrillo" required />
+                          <div class="error"
+                            *ngIf="formUpdate.get('valorCigarrillo').hasError('required') && formUpdate.get('valorCigarrillo').touched"
+                            style="font-size: 14px; text-align: center;  color:red;">No se ha ingresado una cantidad
+                          </div>
+
+                          <label for="tiempoConsumo">Tiempo de consumo en años </label>
+                          <input type="text" value="{{info.tiempoConsumo}} " formControlName="tiempoConsumo"
+                            id="tiempoConsumo" name="tiempoConsumo"
+                            placeholder="Tiempo de consumo en años" required />
+                          <div class="error"
+                            *ngIf="formUpdate.get('tiempoConsumo').hasError('required') && formUpdate.get('tiempoConsumo').touched"
+                            style="font-size: 14px; text-align: center;  color:red;">No se ha ingresado una cantidad
+                          </div>
+
+                          <button type="submit" [disabled]="formUpdate.invalid" class="btn btn-success"
+                            (click)="updateInfo(info.id)">Actualizar</button>
+
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <button class="btn btn-primary float-right mb-3" (click)="open(content)">Actualizar</button>
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="onDeleteTarea(info.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

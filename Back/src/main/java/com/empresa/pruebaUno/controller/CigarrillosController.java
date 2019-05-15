@@ -79,15 +79,15 @@ public class CigarrillosController {
     }
     
       //Actualiza información del consumo de cigarrillos 
-    @PutMapping("/usuarioId/{usuario_id}/cigariiloId/{cigariiloId}/actualizarConsumo")
+    @PutMapping("/usuarioId/{usuario_id}/cigarrilloId/{cigarrilloId}/actualizarConsumo")
     public ResponseEntity<Cigarrillos> updateCigarrillo(@PathVariable Integer usuario_id,
-    						   @PathVariable Integer cigariiloId,
+    						   @PathVariable Integer cigarrilloId,
     						   @Valid @RequestBody Cigarrillos cigarrillosUpdated) {
     
         Optional<Usuario> user = this.usuarioService.findOne(usuario_id);
         if (user.isPresent()) {
             
-            return cigarrillosRepository.findById(cigariiloId)
+            return cigarrillosRepository.findById(cigarrilloId)
                 .map(cigarrillo -> {
                     cigarrillo.setCigarrosDiarios(cigarrillosUpdated.getCigarrosDiarios());
                    // cigarrillo.setFechaInicio(Date.from(Instant.now()));
@@ -96,7 +96,7 @@ public class CigarrillosController {
                     cigarrillo.setTiempoConsumo(cigarrillosUpdated.getTiempoConsumo());
                     cigarrillo.setValorCigarrillo(cigarrillosUpdated.getValorCigarrillo());
                      return new ResponseEntity<>(cigarrillosRepository.save(cigarrillo), HttpStatus.CREATED);
-                }).orElseThrow(() -> new EntityNotFoundException("No se pudo encontrar la información de consumo "+cigariiloId));
+                }).orElseThrow(() -> new EntityNotFoundException("No se pudo encontrar la información de consumo "+cigarrilloId));
         }else 
             throw new EntityNotFoundException("No se pudo obtener el usuario ");
     }
@@ -120,32 +120,32 @@ public class CigarrillosController {
     
     
      //Información de consumo de un usuario
-    @GetMapping("/usuario/{usuario_id}/informacionCigarrillo")
-    public ResponseEntity <Cigarrillos> findByUsuarioId (@Valid @PathVariable Integer usuario_id){
-    
-        Optional<Usuario> user = this.usuarioService.findOne(usuario_id);
-
-        if (!user.isPresent()) {
-            throw new EntityNotFoundException("No se pudo obtener el usuario ");
-        }   	
-        Cigarrillos cig = cigarrillosService.findByUsuarioId(usuario_id);
-        if(cig == null){
-          return null;
-        }
-        return new ResponseEntity<>( cigarrillosService.findByUsuarioId(usuario_id), HttpStatus.OK);   
-    }
-    
+//    @GetMapping("/usuario/{usuario_id}/informacionCigarrillo")
+//    public ResponseEntity <Cigarrillos> findByUsuarioId (@Valid @PathVariable Integer usuario_id){
+//    
+//        Optional<Usuario> user = this.usuarioService.findOne(usuario_id);
+//
+//        if (!user.isPresent()) {
+//            throw new EntityNotFoundException("No se pudo obtener el usuario ");
+//        }   	
+//        Cigarrillos cig = cigarrillosService.findByUsuarioId(usuario_id);
+//        if(cig == null){
+//           throw new EntityNotFoundException("No se regisra información del consumo ");
+//        }
+//        return new ResponseEntity<>( cigarrillosService.findByUsuarioId(usuario_id), HttpStatus.OK);   
+//    }
+//    
     @GetMapping("/valor/{usuario_id}")
     public int valor(@Valid @PathVariable Integer usuario_id) {
         int dias = 0;
         Optional<Usuario> user = this.usuarioService.findOne(usuario_id);
         if (user.isPresent()) {
-            Cigarrillos cig =  cigarrillosService.findByUsuarioId(usuario_id);
-            if (cig==null) {
+            List<Cigarrillos> cig =  cigarrillosService.findByUsuarioId(usuario_id);
+            if (cig.isEmpty()) {
                 return dias;
             }else{
-                Date fechaInicio = cig.getFechaInicio();
-                Date fechaActual = cig.getFechaFin();
+                Date fechaInicio = cig.get(0).getFechaInicio();
+                Date fechaActual = cig.get(0).getFechaFin();
     ;
 
                 dias = (int) ((fechaActual.getTime() - fechaInicio.getTime()) / 86400000);
@@ -158,22 +158,18 @@ public class CigarrillosController {
         return dias;
     }
     
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
  
-		
-//    @GetMapping("/valor/{usuario_id}")
-//    public void givenTwoDatesBeforeJava8_whenDifferentiating_thenWeGetSix()
-//            throws ParseException {
-//
-//        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-//        Date firstDate = sdf.parse("06/24/2017");
-//        Date secondDate = sdf.parse("06/30/2017");
-//
-//        long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
-//        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-//
-//        assertEquals(diff, 6);
-//    }
+    
+    @GetMapping("/usuario/{usuario_id}/informacionCigarrillo")
+    public ResponseEntity<List<Cigarrillos>> listarConsumobyUsuarioId (@Valid @PathVariable Integer usuario_id){
+    
+        Optional<Usuario> user = this.usuarioService.findOne(usuario_id);
+
+        if (!user.isPresent()) {
+            throw new EntityNotFoundException("No se pudo obtener el usuario ");
+        }   	
+        return new ResponseEntity<>( cigarrillosService.findByUsuarioId(usuario_id), HttpStatus.OK);   
+    }
 }
 
 

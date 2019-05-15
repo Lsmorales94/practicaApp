@@ -27,10 +27,10 @@ public class CigarrillosService {
       return cigarrillosRepository.findAll();
     }
     
-//    public List<Cigarrillos> findByUsuarioId(Integer usuario_id){
-//        return cigarrillosRepository.findByUsuarioId(usuario_id);    
-//    }
-    public Cigarrillos findByUsuarioId(Integer usuario_id){
-        return cigarrillosRepository.findByUsuarioId(usuario_id);
+    public List<Cigarrillos> findByUsuarioId(Integer usuario_id){
+        return cigarrillosRepository.findByUsuarioId(usuario_id);    
     }
+//    public Cigarrillos findByUsuarioId(Integer usuario_id){
+//        return cigarrillosRepository.findByUsuarioId(usuario_id);
+//    }
 }

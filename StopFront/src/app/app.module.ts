@@ -31,6 +31,7 @@ import { Usuario } from './models/usuario.model';
 import { InformesComponent } from './components/categorias/informes/informes.component';
 import { ActividadComponent } from './components/categorias/actividad/actividad.component';
 import { CigarrillosComponent } from './components/categorias/cigarrillos/cigarrillos.component';
+import { Cigarrillos } from './models/cigarrillos.model';
 
 
 @NgModule({
@@ -64,14 +65,14 @@ import { CigarrillosComponent } from './components/categorias/cigarrillos/cigarr
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule,
+    NgbModule,    
     ToastrModule.forRoot({
       timeOut: 1500,
       positionClass: 'toast-top-right',
       preventDuplicates: false,
     })
   ],
-  providers: [Usuario],
+  providers: [Usuario, Cigarrillos],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

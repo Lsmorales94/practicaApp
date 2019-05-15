@@ -37,7 +37,7 @@ public class Cigarrillos {
     String marcaCigarrillo;
     
     @Column (name ="valor_cigarrillo")
-    String valorCigarrillo;
+    int valorCigarrillo;
     
     @Column (name = "cigarros_Diarios")
     int cigarrosDiarios;
@@ -63,7 +63,7 @@ public class Cigarrillos {
     public Cigarrillos() {
     }
         
-    public Cigarrillos(int id, String marcaCigarrillo, String valorCigarrillo, int cigarrosDiarios, int tiempoConsumo, Date fechaInicio, Date fechaFin, Usuario usuario) {
+    public Cigarrillos(int id, String marcaCigarrillo, int valorCigarrillo, int cigarrosDiarios, int tiempoConsumo, Date fechaInicio, Date fechaFin, Usuario usuario) {
         this.id = id;
         this.marcaCigarrillo = marcaCigarrillo;
         this.valorCigarrillo = valorCigarrillo;
@@ -90,11 +90,11 @@ public class Cigarrillos {
         this.marcaCigarrillo = marcaCigarrillo;
     }
 
-    public String getValorCigarrillo() {
+    public int getValorCigarrillo() {
         return valorCigarrillo;
     }
 
-    public void setValorCigarrillo(String valorCigarrillo) {
+    public void setValorCigarrillo(int valorCigarrillo) {
         this.valorCigarrillo = valorCigarrillo;
     }
 

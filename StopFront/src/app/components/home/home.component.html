@@ -28,9 +28,9 @@
       </mat-list-item>
 
       <mat-list-item>
-        <button class="menu-item" mat-flat-button>
+        <button class="menu-item" mat-flat-button (click)="navigateComponent('informes')">
           <mat-icon>assignment</mat-icon>
-          Historial
+          Informes
         </button>
       </mat-list-item>
       <mat-list-item>
@@ -42,7 +42,7 @@
       <mat-list-item>
         <button class="menu-item" mat-flat-button (click)="navigateComponent('cigarrillos');">
           <mat-icon>smoke_free</mat-icon>
-           Cigarros Fuera
+          Agregar consumo
         </button>
       </mat-list-item>
 
@@ -56,12 +56,13 @@
     </mat-list>
   </mat-sidenav>
   <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
-    
-<app-actividad *ngIf=showActividadComponent></app-actividad>
-<app-perfil *ngIf=showPerfilComponent></app-perfil>
-<app-cigarrillos *ngIf=showCigarrillosComponent></app-cigarrillos>
+
+    <app-actividad *ngIf=showActividadComponent></app-actividad>
+    <app-perfil *ngIf=showPerfilComponent></app-perfil>
+    <app-cigarrillos *ngIf=showCigarrillosComponent></app-cigarrillos>
+    <app-informes *ngIf=showInformesComponent></app-informes>
     <!-- <app-actividad></app-actividad>-->
-   <!-- <mat-selection-list class="dash-list">
+    <!-- <mat-selection-list class="dash-list">
       <h3>Metas</h3>
       <mat-list-option *ngFor="let todo of task">
         {{todo}}

@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { TipoUsuario } from '../models/tipousuario.model';
 import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
+import { elementStyleProp } from '@angular/core/src/render3';
 
 @Injectable({
   providedIn: 'root' 
@@ -16,7 +17,7 @@ export class LoginService {
   constructor(private http: HttpClient, private currentUser: Usuario) {
     /*  UserRegisterService.instance = this; */
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
-  }
+  } 
 
   public add(user) {
     return this.http.post(this.accessPointUrl + "/registrar", user, { headers: this.headers });
@@ -46,4 +47,14 @@ export class LoginService {
   public getUserId() {
     return this.currentUser.id;
   }
+
+  public getCigarrilloId() {
+      return this.currentUser.cigarrillos[0].id
+  }
+    /*if(this.currentUser.cigarrillos != null){
+        return this.currentUser.cigarrillos[0].id
+    }else{
+      return 0;
+    }*/
+    
 }

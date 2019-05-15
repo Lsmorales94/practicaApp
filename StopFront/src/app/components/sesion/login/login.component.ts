@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
     if(user!=null)
     {
       this.toastr.success('Bienvenido');
+      console.log(user);
       this.loginService.setLoginInfo(user);
       this.router.navigate(['/home']);
     }
