@@ -5,6 +5,10 @@ import { LoginService } from 'src/app/services/login.service';
 import { CigarrillosService } from 'src/app/services/cigarrillos.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Menssage } from 'src/app/models/menssage.model';
+
+import { ChartType } from 'chart.js';
+import { MultiDataSet, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-informes',
@@ -12,15 +16,26 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
   styleUrls: ['./informes.component.css']
 })
 export class InformesComponent implements OnInit {
-            
+  
+  public menssage: Menssage;
   public infoCigarrillo: Array<Cigarrillos>;
   public UsuarioId: number;  
   public CigarrilloInfo: number;
   public mostrarDatos : boolean;
   public formUpdate: FormGroup;
 
+  
+  public doughnutChartLabels: Label[] = ['Días de consumo', 'Días sin fumar'];
+  public doughnutChartData: MultiDataSet = [
+     
+      [350, 4],
+   // [50, 150],
+    //[250, 130],
+  ];
+  public doughnutChartType: ChartType = 'doughnut';
+
   constructor(private toastr: ToastrService, private loginService: LoginService, private formBuilder: FormBuilder,
-                private config: NgbModalConfig, private modalService: NgbModal,
+                config: NgbModalConfig, private modalService: NgbModal,
                 private cigarrillosService: CigarrillosService, ) {
 
       this.UsuarioId = this.loginService.getUserId();
@@ -32,13 +47,24 @@ export class InformesComponent implements OnInit {
   ngOnInit() {
     this.mostrarDatos = false;
     this.getInfo();
+    
     this.formUpdate = this.formBuilder.group({
+      
       cigarrosDiarios: ['', Validators.required],
       marcaCigarrillo: ['', Validators.required],
       valorCigarrillo: ['', Validators.required],
       tiempoConsumo: ['', Validators.required]
-    });
+    })
   }
+
+    // events
+    public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+      console.log(event, active);
+    }
+  
+    public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+      console.log(event, active);
+    }
 
   
   getInfo() {
@@ -68,5 +94,6 @@ export class InformesComponent implements OnInit {
   open(contentModal) {
     this.modalService.open(contentModal);
   }
+
 
 }

@@ -102,14 +102,14 @@ public class CigarrillosController {
     }
     
      //Borra Tarea
-    @DeleteMapping("/usuarioId/{usuarioId}/cigariiloId/{cigariiloId}")
+    @DeleteMapping("/usuarioId/{usuarioId}/cigarrilloId/{cigariiloId}")
     public ResponseEntity<Menssage> deleteTarea(@PathVariable Integer usuarioId,
-    						@PathVariable Integer cigariiloId) {
+    						@PathVariable Integer cigarrilloId) {
     	
     	Optional<Usuario> user = this.usuarioService.findOne(usuarioId);
         if (user.isPresent()) {
     	
-            return cigarrillosRepository.findById(cigariiloId)
+            return cigarrillosRepository.findById(cigarrilloId)
                     .map(cigarrillo -> {
                         cigarrillosRepository.delete(cigarrillo);
                         return new ResponseEntity<Menssage>(new Menssage("Información de consumo eliminada "),HttpStatus.ACCEPTED);
