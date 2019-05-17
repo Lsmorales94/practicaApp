@@ -81,7 +81,7 @@
                             </div>
                             <br>
 
-                            <label for="tiempoConsumo">Tiempo de consumo en años </label>
+                            <label for="tiempoConsumo">Tiempo de consumo en meses </label>
                             <input type="text" class="form-control" value="{{info.tiempoConsumo}} "
                               formControlName="tiempoConsumo" id="tiempoConsumo" name="tiempoConsumo"
                               placeholder="Tiempo de consumo en años" required />
@@ -109,14 +109,22 @@
   </div>
 </div>
 
-<div>
+<div class="row">
+  <div class="col-md-8">
     <div>
-      <div style="display: block">
-        <canvas baseChart
-          [data]="doughnutChartData"
-          [labels]="doughnutChartLabels"
-          [chartType]="doughnutChartType">
-        </canvas>
+      <div>
+        <div style="display: block">
+          <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType">
+          </canvas>
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="col-md-2">
+    <button type="button" name="button-fechaActual" class="btn btn-primary btn-block"
+        (click)="calDias()">
+      Actualizar 
+    </button>
+  </div>
+</div>

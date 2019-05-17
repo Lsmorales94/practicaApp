@@ -51,10 +51,11 @@ export class LoginService {
   public getCigarrilloId() {
       return this.currentUser.cigarrillos[0].id
   }
-    /*if(this.currentUser.cigarrillos != null){
-        return this.currentUser.cigarrillos[0].id
-    }else{
-      return 0;
-    }*/
+
+  public getCigarrilloTiempo(){
+      return this.currentUser.cigarrillos[0].tiempoConsumo;
+    
+  }
+    
     
 }

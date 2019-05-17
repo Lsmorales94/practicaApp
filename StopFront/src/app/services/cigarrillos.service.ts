@@ -33,6 +33,9 @@ export class CigarrillosService {
     return this.http.delete<Menssage>(this.accessPointUrl + '/usuarioId/' + UsuarioId + '/cigarrilloId/' + cigarrilloId, { headers: this.headers });
   }
 
+  public calDias(UsuarioId){
+    return this.http.get<number>(this.accessPointUrl+'/valor/'+UsuarioId, { headers: this.headers });
+  }
 
   
 

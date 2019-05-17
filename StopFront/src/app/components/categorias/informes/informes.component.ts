@@ -23,15 +23,10 @@ export class InformesComponent implements OnInit {
   public CigarrilloInfo: number;
   public mostrarDatos : boolean;
   public formUpdate: FormGroup;
-
+  public dias_sin_fumar:number;
   
   public doughnutChartLabels: Label[] = ['Días de consumo', 'Días sin fumar'];
-  public doughnutChartData: MultiDataSet = [
-     
-      [350, 4],
-   // [50, 150],
-    //[250, 130],
-  ];
+  public doughnutChartData: number[] = [0,0];
   public doughnutChartType: ChartType = 'doughnut';
 
   constructor(private toastr: ToastrService, private loginService: LoginService, private formBuilder: FormBuilder,
@@ -39,6 +34,7 @@ export class InformesComponent implements OnInit {
                 private cigarrillosService: CigarrillosService, ) {
 
       this.UsuarioId = this.loginService.getUserId();
+
       // customize default values of modals used by this component tree
       config.backdrop = 'static';
       config.keyboard = false;
@@ -48,6 +44,7 @@ export class InformesComponent implements OnInit {
     this.mostrarDatos = false;
     this.getInfo();
     
+    
     this.formUpdate = this.formBuilder.group({
       
       cigarrosDiarios: ['', Validators.required],
@@ -55,9 +52,10 @@ export class InformesComponent implements OnInit {
       valorCigarrillo: ['', Validators.required],
       tiempoConsumo: ['', Validators.required]
     })
+    
   }
 
-    // events
+    // events donut
     public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
       console.log(event, active);
     }
@@ -80,14 +78,16 @@ export class InformesComponent implements OnInit {
     )
   }
   async updateInfo(cigarrillId:number){
+
     var cig = <Cigarrillos>this.formUpdate.value;
-    let nuevaTarea = <Cigarrillos>await this.cigarrillosService.updateInfo(this.UsuarioId,cigarrillId, cig).toPromise();
-    console.log(nuevaTarea);
-    if (nuevaTarea.id != null) {
+    let nuevoCigarrillo = <Cigarrillos>await this.cigarrillosService.updateInfo(this.UsuarioId,cigarrillId, cig).toPromise();
+    console.log(nuevoCigarrillo);
+   
+    if (nuevoCigarrillo.id != null) {      
       this.toastr.success('Activida Actualizada ');
-      this.getInfo();
-    }else{
-      this.toastr.error('No se pudo actualizar la actividad')
+      this.getInfo();    
+    }else{    
+      this.toastr.error('No se pudo actualizar la actividad')    
     }
   }
   //Apertura de modal para registrar nueva Actividad
@@ -95,5 +95,21 @@ export class InformesComponent implements OnInit {
     this.modalService.open(contentModal);
   }
 
+  async calDias() {
+
+    let numTiempo_fumando: number;
+    let dias_consumo:number;
+
+    if (this.UsuarioId != null) {
+      this.dias_sin_fumar = await this.cigarrillosService.calDias(this.UsuarioId).toPromise();      
+      numTiempo_fumando = this.loginService.getCigarrilloTiempo();
+       
+    } else {
+      this.dias_sin_fumar = 0;   
+      numTiempo_fumando = 0; 
+    }    
+    dias_consumo=numTiempo_fumando * 30;
+    this.doughnutChartData = [dias_consumo, this.dias_sin_fumar ]
+  }
 
 }

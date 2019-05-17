@@ -17,10 +17,13 @@ import com.empresa.pruebaUno.service.UsuarioService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
@@ -67,7 +70,7 @@ public class CigarrillosController {
    //Agregar información de cigarrrillos a un usuario Registrado
     @CrossOrigin(origins = "*")
     @PostMapping(value = "/usuario/{usuario_id}/agregarConsumo")
-    public ResponseEntity<Cigarrillos> agregarTarea(@Valid @PathVariable Integer usuario_id,
+    public ResponseEntity<Cigarrillos> agregarConsumo(@Valid @PathVariable Integer usuario_id,
                                @Valid @RequestBody Cigarrillos cigarrillo) {
           return usuarioRepository.findById(usuario_id)
                   .map(usuario -> {
@@ -138,22 +141,28 @@ public class CigarrillosController {
     @GetMapping("/valor/{usuario_id}")
     public int valor(@Valid @PathVariable Integer usuario_id) {
         int dias = 0;
-        Optional<Usuario> user = this.usuarioService.findOne(usuario_id);
-        if (user.isPresent()) {
-            List<Cigarrillos> cig =  cigarrillosService.findByUsuarioId(usuario_id);
-            if (cig.isEmpty()) {
-                return dias;
-            }else{
-                Date fechaInicio = cig.get(0).getFechaInicio();
-                Date fechaActual = cig.get(0).getFechaFin();
-    ;
+        if (usuario_id == 0) {
+            dias = 0;
+        } else {
 
-                dias = (int) ((fechaActual.getTime() - fechaInicio.getTime()) / 86400000);
+            Optional<Usuario> user = this.usuarioService.findOne(usuario_id);
+            if (user.isPresent()) {
+                List<Cigarrillos> cig = cigarrillosService.findByUsuarioId(usuario_id);
+                if (cig.isEmpty()) {
+                    return dias;
+                } else {
+                    cig.get(0).setFechaFin(Date.from(Instant.now()));
+                    Date fechaInicio = cig.get(0).getFechaInicio();
+                    Date fechaActual = cig.get(0).getFechaFin();
 
-                System.out.println("Hay " + dias + " dias de diferencia");
+                    dias = (int) ((fechaActual.getTime() - fechaInicio.getTime()) / 86400000);
+
+                    System.out.println("Hay " + dias + " dias de diferencia");
+                    cigarrillosRepository.save(cig.get(0));
+                }
+            } else {
+                throw new EntityNotFoundException("No se pudo obtener el usuario ");
             }
-        }else{
-            throw new EntityNotFoundException("No se pudo obtener el usuario ");
         }
         return dias;
     }
