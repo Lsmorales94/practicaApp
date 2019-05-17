@@ -43,7 +43,7 @@
 
             <div class="form-group">
                 
-                <label class="control-label" for="tiempoConsumo">Tiempo de consumo en años </label>
+                <label class="control-label" for="tiempoConsumo">Tiempo de consumo en meses </label>
                 <input type="text" formControlName="tiempoConsumo" class="form-control" id="tiempoConsumo" name="tiempoConsumo"
                     placeholder="Tiempo de consumo en años" required />
                 <div class="error" *ngIf="myForm.get('tiempoConsumo').hasError('required') && myForm.get('tiempoConsumo').touched" style="font-size: 14px; text-align: center;  color:red;">No se ha ingresado una cantidad</div>

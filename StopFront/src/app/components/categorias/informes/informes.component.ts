@@ -84,10 +84,10 @@ export class InformesComponent implements OnInit {
     console.log(nuevoCigarrillo);
    
     if (nuevoCigarrillo.id != null) {      
-      this.toastr.success('Activida Actualizada ');
+      this.toastr.success('Información de consumo Actualizada ');
       this.getInfo();    
     }else{    
-      this.toastr.error('No se pudo actualizar la actividad')    
+      this.toastr.error('No se pudo actualizar la información')    
     }
   }
   //Apertura de modal para registrar nueva Actividad
@@ -96,7 +96,7 @@ export class InformesComponent implements OnInit {
   }
 
   async calDias() {
-
+    this.getInfo();
     let numTiempo_fumando: number;
     let dias_consumo:number;
 
