@@ -45,6 +45,7 @@ export class InformesComponent implements OnInit {
     this.getInfo();
     
     
+    
     this.formUpdate = this.formBuilder.group({
       
       cigarrosDiarios: ['', Validators.required],
@@ -87,7 +88,7 @@ export class InformesComponent implements OnInit {
       this.toastr.success('Información de consumo Actualizada ');
       this.getInfo();    
     }else{    
-      this.toastr.error('No se pudo actualizar la información')    
+      this.toastr.warning('No se pudo actualizar la información')    
     }
   }
   //Apertura de modal para registrar nueva Actividad

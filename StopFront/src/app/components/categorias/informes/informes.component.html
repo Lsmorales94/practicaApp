@@ -27,9 +27,8 @@
               <td>{{info.tiempoConsumo}}</td>
               <td>{{info.fechaInicio}}</td>
               <td>
-                <!--Modal para actualizar tarea -->
 
-                <!--Modal para actualizar tarea -->
+                <!--Modal para actualizar tabla de informacion -->
                 <ng-template #content let-c="close" let-d="dismiss">
                   <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -84,7 +83,7 @@
                             <label for="tiempoConsumo">Tiempo de consumo en meses </label>
                             <input type="text" class="form-control" value="{{info.tiempoConsumo}} "
                               formControlName="tiempoConsumo" id="tiempoConsumo" name="tiempoConsumo"
-                              placeholder="Tiempo de consumo en años" required />
+                              placeholder="Tiempo de consumo en meses" required />
                             <div class="error"
                               *ngIf="formUpdate.get('tiempoConsumo').hasError('required') && formUpdate.get('tiempoConsumo').touched"
                               style="font-size: 14px; text-align: center;  color:red;">No se ha ingresado una cantidad
