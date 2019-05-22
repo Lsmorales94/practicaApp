@@ -138,8 +138,8 @@ public class CigarrillosController {
 //        return new ResponseEntity<>( cigarrillosService.findByUsuarioId(usuario_id), HttpStatus.OK);   
 //    }
 //    
-    @GetMapping("/valor/{usuario_id}")
-    public int valor(@Valid @PathVariable Integer usuario_id) {
+    @GetMapping("/getDiasSinFumar/UsuarioId/{usuario_id}")
+    public int getDiasSinFumar(@Valid @PathVariable Integer usuario_id) {
         int dias = 0;
         if (usuario_id == 0) {
             dias = 0;
@@ -167,6 +167,73 @@ public class CigarrillosController {
         return dias;
     }
     
+    @GetMapping("/tiempoConsumo/usuarioId/{usuario_id}")
+    public int getTiempoConsumo(@Valid @PathVariable Integer usuario_id) {
+        int calTiempo = 0;
+        if (usuario_id == 0) {
+            calTiempo = 0;
+        } else {
+
+            Optional<Usuario> user = this.usuarioService.findOne(usuario_id);
+            if (user.isPresent()) {
+                List<Cigarrillos> cig = cigarrillosService.findByUsuarioId(usuario_id);
+                if (cig.isEmpty()) {
+                    return calTiempo;
+                } else {
+                    calTiempo = cig.get(0).getTiempoConsumo() * 30;
+                }
+            } else {
+                throw new EntityNotFoundException("No se pudo obtener el usuario ");
+            }
+        }
+        return calTiempo;
+    }
+    
+    @GetMapping("/getCigarrilloPrecio/usuarioId/{usuario_id}")
+    public double getCigarrilloPrecio(@Valid @PathVariable Integer usuario_id) {
+        double precio = 0;
+        if (usuario_id == 0) {
+            precio = 0;
+        } else {
+
+            Optional<Usuario> user = this.usuarioService.findOne(usuario_id);
+            if (user.isPresent()) {
+                List<Cigarrillos> cig = cigarrillosService.findByUsuarioId(usuario_id);
+                if (cig.isEmpty()) {
+                    return precio;
+                } else {
+                    precio = cig.get(0).getValorCigarrillo();
+                }
+            } else {
+                throw new EntityNotFoundException("No se pudo obtener el usuario ");
+            }
+        }
+        return precio;
+    }
+    
+    @GetMapping("/getCigarrilloCantidadDia/usuarioId/{usuario_id}")
+    public int getCigarrillosCantidadDia(@Valid @PathVariable Integer usuario_id) {
+        int cantidad = 0;
+        if (usuario_id == 0) {
+            cantidad = 0;
+        } else {
+
+            Optional<Usuario> user = this.usuarioService.findOne(usuario_id);
+            if (user.isPresent()) {
+                List<Cigarrillos> cig = cigarrillosService.findByUsuarioId(usuario_id);
+                if (cig.isEmpty()) {
+                    return cantidad;
+                } else {
+                    cantidad = cig.get(0).getCigarrosDiarios();
+                }
+            } else {
+                throw new EntityNotFoundException("No se pudo obtener el usuario ");
+            }
+        }
+        return cantidad;
+    }
+    
+ 
  
     
     @GetMapping("/usuario/{usuario_id}/informacionCigarrillo")

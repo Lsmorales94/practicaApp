@@ -109,7 +109,20 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-2">
+    <mat-card class="example-container">
+      <mat-card-title style="font-size: 14px; text-align: center">
+        <h1>Has Ahorrado</h1>
+        <h2>{{dineroAhorrado}}</h2>
+      </mat-card-title>
+      <br>
+      <button mat-raised-button color="primary" (click)="calDineroAhorrado()">Actualizar</button>
+      <br>
+    </mat-card>
+
+  </div>
+
+  <div class="col-md-7">
     <div>
       <div>
         <div style="display: block">
@@ -120,16 +133,16 @@
     </div>
   </div>
 
-  <div class="col-md-2">    
+  <div class="col-md-2">
     <mat-card class="example-container">
       <mat-card-title style="font-size: 14px; text-align: center">
         <h1>{{dias_sin_fumar}} Días Sin Fumar</h1>
-        </mat-card-title>
-        <br>      
-      <button mat-raised-button color="primary"  (click)="calDias()">Actualizar</button>
-      <br>     
+      </mat-card-title>
+      <br>
+      <button mat-raised-button color="primary" (click)="calDias()">Actualizar</button>
+      <br>
     </mat-card>
-    
+
   </div>
- 
+
 </div>

@@ -9,6 +9,7 @@ import { Menssage } from '../models/menssage.model';
 })
 export class CigarrillosService {
 
+  public numData:number;
   private headers: HttpHeaders;
   private accessPointUrl: string = 'http://localhost:8080/cigarrillos';
   /* static instance:UserRegisterService; */
@@ -33,10 +34,21 @@ export class CigarrillosService {
     return this.http.delete<Menssage>(this.accessPointUrl + '/usuarioId/' + UsuarioId + '/cigarrilloId/' + cigarrilloId, { headers: this.headers });
   }
 
-  public calDias(UsuarioId){
-    return this.http.get<number>(this.accessPointUrl+'/valor/'+UsuarioId, { headers: this.headers });
+  public getDiasSinFumar(UsuarioId){
+    return this.http.get<number>(this.accessPointUrl+'/getDiasSinFumar/UsuarioId/'+UsuarioId, { headers: this.headers });
   }
 
-  
+  public getCigarrilloPrecio(UsuarioId){    
+    return this.http.get<number>(this.accessPointUrl+'/getCigarrilloPrecio/usuarioId/'+UsuarioId, { headers: this.headers });
+  }
 
+  public getCigarrilloTiempo(UsuarioId) {
+    return this.http.get<number>(this.accessPointUrl+'/tiempoConsumo/usuarioId/'+UsuarioId, { headers: this.headers });
+  } 
+
+  public getCigarrillosCantidadDia(UsuarioId){
+    return this.http.get<number>(this.accessPointUrl+'/getCigarrilloCantidadDia/usuarioId/'+UsuarioId, { headers: this.headers });
+   }
+  
 }
+ 

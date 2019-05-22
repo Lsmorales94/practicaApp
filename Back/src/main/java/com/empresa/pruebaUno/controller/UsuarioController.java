@@ -52,7 +52,7 @@ public class UsuarioController {
         Usuario usr = this.usuarioService.findByusuarioEmail(user.getUsuarioEmail());
         if (usr != null) {
 
-            throw new EntityNotFoundException("El usuario se encuentra registrado");
+            return null;
         }
         return new ResponseEntity<>(usuarioService.Save(user), HttpStatus.CREATED);
     }

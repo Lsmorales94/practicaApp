@@ -33,11 +33,11 @@ export class RegistroComponent implements OnInit {
     let currentUser = <Usuario>this.myForm.value;
     console.log(currentUser);
     let newUser = <Usuario>await this.loginService.add(currentUser).toPromise();
-    if (newUser.id != null) {
+    if (newUser!= null) {
       this.toastr.success('Usuario Registrado');
       this.router.navigate(['/login']);
-    }else{
-      this.toastr.error('Error al registrar usuario');
+    }else {
+      this.toastr.error('Error el usuario ya se encuentra registrado');
     }
   }
   

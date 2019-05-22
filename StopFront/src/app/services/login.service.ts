@@ -48,14 +48,7 @@ export class LoginService {
     return this.currentUser.id;
   }
 
-  public getCigarrilloId() {
-      return this.currentUser.cigarrillos[0].id
-  }
-
-  public getCigarrilloTiempo(){
-      return this.currentUser.cigarrillos[0].tiempoConsumo;
-    
-  }
+  
     
     
 }
