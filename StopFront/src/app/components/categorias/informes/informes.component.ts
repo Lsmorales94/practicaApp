@@ -44,7 +44,8 @@ export class InformesComponent implements OnInit {
   ngOnInit() {
     this.mostrarDatos = false;
     this.getInfo();
-
+    this.calDias();
+    this.calDineroAhorrado();
 
 
     this.formUpdate = this.formBuilder.group({

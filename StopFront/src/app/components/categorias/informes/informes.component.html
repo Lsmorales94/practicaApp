@@ -3,7 +3,7 @@
     <h3>Información</h3>
     <div class="row mt-5">
       <div class="col">
-        <table class="table table-hover">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -25,7 +25,7 @@
               <td>{{info.marcaCigarrillo}}</td>
               <td>{{info.cigarrosDiarios}}</td>
               <td>{{info.tiempoConsumo}}</td>
-              <td>{{info.fechaInicio}}</td>
+              <td>{{info.fechaInicio | date:'yyyy/MM/ss'}}</td>
               <td>
 
                 <!--Modal para actualizar tabla de informacion -->
@@ -106,43 +106,44 @@
       </div>
     </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col-md-2">
+      <mat-card class="example-container">
+        <mat-card-title style="font-size: 30px; text-align: center">
+          Has Ahorrado:
+          <hr>
+          <h2>${{dineroAhorrado}}</h2>
+        </mat-card-title>
+        <br>
+        <button mat-raised-button color="primary" (click)="calDineroAhorrado()">Actualizar</button>
+        <br>
+      </mat-card>
 
-<div class="row">
-  <div class="col-md-2">
-    <mat-card class="example-container">
-      <mat-card-title style="font-size: 14px; text-align: center">
-        <h1>Has Ahorrado</h1>
-        <h2>{{dineroAhorrado}}</h2>
-      </mat-card-title>
-      <br>
-      <button mat-raised-button color="primary" (click)="calDineroAhorrado()">Actualizar</button>
-      <br>
-    </mat-card>
+    </div>
 
-  </div>
-
-  <div class="col-md-7">
-    <div>
+    <div class="col-md-7">
       <div>
-        <div style="display: block">
-          <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType">
-          </canvas>
+        <div>
+          <div style="display: block">
+            <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType">
+            </canvas>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="col-md-2">
+      <mat-card class="example-container">
+        <mat-card-title style="font-size: 30px; text-align: center">
+          Días Sin Fumar:
+          <hr>
+          <h2>{{dias_sin_fumar}}</h2>
+        </mat-card-title>
+        <br>
+        <button mat-raised-button color="primary" (click)="calDias()">Actualizar</button>
+        <br>
+      </mat-card>
+
+    </div>
   </div>
-
-  <div class="col-md-2">
-    <mat-card class="example-container">
-      <mat-card-title style="font-size: 14px; text-align: center">
-        <h1>{{dias_sin_fumar}} Días Sin Fumar</h1>
-      </mat-card-title>
-      <br>
-      <button mat-raised-button color="primary" (click)="calDias()">Actualizar</button>
-      <br>
-    </mat-card>
-
-  </div>
-
 </div>

@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TareasService } from 'src/app/services/tareas.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Tareas } from 'src/app/models/tareas.model';
@@ -8,6 +8,7 @@ import { Menssage } from 'src/app/models/menssage.model';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import * as pluginAnnotations from 'chart.js';
 @Component({
   selector: 'app-actividad',
   templateUrl: './actividad.component.html',
@@ -21,7 +22,8 @@ export class ActividadComponent implements OnInit {
   UsuarioId: number;
   public myForm: FormGroup;
   public formUpdate: FormGroup;
-
+  public actividades_cumplidas: number;
+  
   constructor(private tareasService: TareasService, private loginService: LoginService,
               private formBuilder: FormBuilder, private toastr: ToastrService, private config: NgbModalConfig,
               private modalService: NgbModal, ) {
@@ -30,7 +32,7 @@ export class ActividadComponent implements OnInit {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
     config.keyboard = false;
-
+                this.actividades_cumplidas=0;
   }
 
   ngOnInit() {
@@ -85,10 +87,13 @@ export class ActividadComponent implements OnInit {
     menssage = <Menssage>await this.tareasService.onDeleteTareas(this.UsuarioId, id).toPromise();
     this.toastr.info(menssage.text);
     this.list();
+    this.actividades_cumplidas = this.actividades_cumplidas + 1;
   }
   //Apertura de modal para registrar nueva Actividad
   open(content) {
     this.modalService.open(content);
   }
 
+  //Gráfico
+  
 }
